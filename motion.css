@@ -1,0 +1,55 @@
+/* Hardware-Accelerated Animations & Reduced Motion Tiering */
+@keyframes wavePulse {
+  0%, 100% { transform: scaleY(0.45); }
+  50% { transform: scaleY(1); }
+}
+
+.wave-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+
+.wave-bars i {
+  display: block;
+  width: 2.5px;
+  height: 100%;
+  background: var(--aqua-biolum);
+  border-radius: 2px;
+  transform: scaleY(0.45);
+}
+
+.icon-pill-btn.playing .wave-bars i:nth-child(1) {
+  animation: wavePulse 0.9s infinite ease-in-out;
+}
+.icon-pill-btn.playing .wave-bars i:nth-child(2) {
+  animation: wavePulse 0.9s 0.2s infinite ease-in-out;
+}
+.icon-pill-btn.playing .wave-bars i:nth-child(3) {
+  animation: wavePulse 0.9s 0.4s infinite ease-in-out;
+}
+
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.drink-card {
+  animation: cardReveal 0.45s var(--ease-out-fluid) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

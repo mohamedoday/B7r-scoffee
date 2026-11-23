@@ -1,0 +1,33 @@
+:root {
+  /* Core Luxury Maritime & Obsidian Palette */
+  --bg-abyss: #050a12;
+  --bg-deep-sea: #091322;
+  --bg-surface: rgba(13, 25, 42, 0.72);
+  --bg-surface-elevated: rgba(18, 34, 58, 0.85);
+
+  /* Brand Accents */
+  --gold-primary: #e2b857;
+  --gold-light: #f6dc93;
+  --gold-dark: #9e7622;
+  --aqua-biolum: #5ce1e6;
+  --aqua-deep: #1b6b7a;
+
+  /* Typography */
+  --text-primary: #f4f6f9;
+  --text-secondary: #a5b4c7;
+  --text-muted: #6c7f99;
+
+  /* Borders & Glass */
+  --border-gold: rgba(226, 184, 87, 0.28);
+  --border-glass: rgba(255, 255, 255, 0.09);
+  --shadow-luxury: 0 24px 60px rgba(0, 0, 0, 0.65);
+
+  /* Easing Curves (Fluid Hardware-Accelerated) */
+  --ease-out-fluid: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Typography Scale */
+  --font-ar: 'Cairo', sans-serif;
+  --font-serif: 'Amiri', serif;
+  --font-en: 'Cinzel', serif;
+}
