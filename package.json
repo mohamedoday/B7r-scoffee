@@ -1,0 +1,12 @@
+{
+  "name": "bahr-luxury-cafe-3d-platform",
+  "version": "4.2.0",
+  "description": "Enterprise 3D Interactive Web Platform for Bahr Luxury Coastal Café & Roastery",
+  "type": "module",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx live-server --port=5500"
+  },
+  "author": "Bahr Digital Hospitality Engineering",
+  "license": "PROPRIETARY"
+}

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="كافيه بحر — تجربة القهوة المختصة والمشروبات الفاخرة على ضفاف البحر بأبعاد ثلاثية تفاعلية" />
+  <title>كافيه بحر | BAHR LUXURY CAFÉ & ROASTERY</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="src/css/tokens.css" />
+  <link rel="stylesheet" href="src/css/layout.css" />
+  <link rel="stylesheet" href="src/css/components.css" />
+  <link rel="stylesheet" href="src/css/motion.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  <script type="module" src="src/js/main.js" defer></script>
+</head>
+<body class="theme-obsidian">
+  <!-- Ambient WebGL Ocean & Golden Caustics Canvas -->
+  <canvas id="ambient-ocean-canvas" aria-hidden="true"></canvas>
+
+  <!-- Navigation Header -->
+  <header class="glass-header" role="banner">
+    <div class="container header-inner">
+      <a href="#hero" class="brand-identity" aria-label="كافيه بحر الصفحة الرئيسية">
+        <div class="brand-crest">
+          <svg viewBox="0 0 48 48" width="38" height="38" fill="none">
+            <circle cx="24" cy="24" r="22" stroke="url(#goldGrad)" stroke-width="1.5"/>
+            <path d="M10 28C15 22 21 32 26 26C31 20 35 28 38 25" stroke="url(#goldGrad)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M14 21C18 16 23 23 28 18C31 15 34 19 36 18" stroke="#64DFDF" stroke-width="1.5" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="goldGrad" x1="0" y1="0" x2="48" y2="48">
+                <stop offset="0%" stop-color="#F3D078"/>
+                <stop offset="100%" stop-color="#B8860B"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-titles">
+          <span class="brand-ar">كافيه بحر</span>
+          <span class="brand-en">BAHR ROYAL ROASTERY • EST. 1998</span>
+        </div>
+      </a>
+
+      <nav class="main-nav" aria-label="التنقل الرئيسي">
+        <a href="#hero" class="nav-link active">الواجهة البحرية</a>
+        <a href="#menu-studio" class="nav-link">قائمة المشروبات 3D</a>
+        <a href="#experience" class="nav-link">فلسفة التحميص</a>
+        <a href="#reservation" class="nav-link">حجز مجلس VIP</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="sound-toggle-btn" class="icon-pill-btn" aria-label="تشغيل صوت الأمواج والقهوة" title="المحيط الصوتي">
+          <span class="wave-bars"><i></i><i></i><i></i></span>
+          <span class="btn-label">صوت البحر</span>
+        </button>
+        <button id="cart-open-btn" class="gold-pill-btn" aria-label="سلة الطلبات">
+          <span>سلة الطلبات</span>
+          <span id="cart-badge" class="badge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="app-main">
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="luxury-tag">
+            <span class="dot"></span>
+            <span>إطلالة بانورامية مباشرة على الخليج • منذ ١٩٩٨</span>
+          </div>
+          <h1 class="hero-title">
+            حيث يلتقي عبق <span class="gold-text">البنّ الملكي</span> بسكون أمواج <span class="aqua-text">البحر</span>
+          </h1>
+          <p class="hero-subtitle">
+            تجربة حسية متكاملة في أرقى وجهة ساحلية. استكشف كل مشروب كمجسم ثلاثي الأبعاد تفاعلي، خصّص نكهتك بدقة الباريستا المحترف، واستمتع بفخامة الضيافة.
+          </p>
+          <div class="hero-cta-group">
+            <a href="#menu-studio" class="primary-gold-cta">استكشف القائمة ثلاثية الأبعاد</a>
+            <a href="#reservation" class="secondary-glass-cta">احجز إطلالتك الخاصة</a>
+          </div>
+          <div class="hero-metrics">
+            <div class="metric-item">
+              <strong>+42</strong>
+              <span>مشروب عالمي ومبتكر</span>
+            </div>
+            <div class="metric-divider"></div>
+            <div class="metric-item">
+              <strong>92.5</strong>
+              <span>تقييم محاصيل القهوة المختصة</span>
+            </div>
+            <div class="metric-divider"></div>
+            <div class="metric-item">
+              <strong>360°</strong>
+              <span>معاينة مجسمة لكل طلب</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Interactive 3D Showcase Stage -->
+        <div class="hero-3d-stage">
+          <div class="stage-halo"></div>
+          <div id="hero-cup-container" class="webgl-box" aria-label="مجسم ثلاثي الأبعاد تفاعلي لكوب كافيه بحر المميز"></div>
+          <div class="stage-caption glass-card">
+            <span class="caption-badge">إصدار الشيف الخاص</span>
+            <h3>لاتيه اللؤلؤ البحري المذهب</h3>
+            <p>اسحب لتدوير المجسم 360° • تحميص إثيوبي فاخر مع رغوة ملح البحر والذهب الصالح للأكل</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive 3D Menu Studio -->
+    <section id="menu-studio" class="menu-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">قائمة التذوق التفاعلية</span>
+          <h2 class="section-title">اختر فئة المشروب واستعرضه بتقنية <span class="gold-text">3D</span></h2>
+          <p class="section-desc">كل مشروب مصمم هندسياً كمجسم ثلاثي الأبعاد يوضح طبقات القهوة، الرغوة، الثلج، والإضافات الفاخرة.</p>
+        </div>
+
+        <!-- Distinct Category Tabs -->
+        <div class="category-tabs-wrapper" role="tablist" aria-label="تصنيفات المشروبات">
+          <button class="cat-tab active" role="tab" aria-selected="true" data-category="all">
+            <span class="tab-icon">✦</span>
+            <span class="tab-title">جميع المشروبات</span>
+            <span class="tab-count" id="count-all">24</span>
+          </button>
+          <button class="cat-tab" role="tab" aria-selected="false" data-category="espresso">
+            <span class="tab-icon">☕</span>
+            <span class="tab-title">الإسبريسو والقهوة الساخنة</span>
+            <span class="tab-count">6</span>
+          </button>
+          <button class="cat-tab" role="tab" aria-selected="false" data-category="specialty">
+            <span class="tab-icon">⚗️</span>
+            <span class="tab-title">القهوة المختصة المقطرة</span>
+            <span class="tab-count">4</span>
+          </button>
+          <button class="cat-tab" role="tab" aria-selected="false" data-category="iced">
+            <span class="tab-icon">🧊</span>
+            <span class="tab-title">القهوة المثلجة والباردة</span>
+            <span class="tab-count">4</span>
+          </button>
+          <button class="cat-tab" role="tab" aria-selected="false" data-category="signature">
+            <span class="tab-icon">👑</span>
+            <span class="tab-title">ابتكارات كافيه بحر</span>
+            <span class="tab-count">4</span>
+          </button>
+          <button class="cat-tab" role="tab" aria-selected="false" data-category="mojito">
+            <span class="tab-icon">🍹</span>
+            <span class="tab-title">الموهيتو والعصائر الطازجة</span>
+            <span class="tab-count">3</span>
+          </button>
+          <button class="cat-tab" role="tab" aria-selected="false" data-category="tea">
+            <span class="tab-icon">🍃</span>
+            <span class="tab-title">الشاي الملكي والماتشا</span>
+            <span class="tab-count">3</span>
+          </button>
+        </div>
+
+        <!-- Search & Filter Bar -->
+        <div class="menu-controls-bar glass-panel">
+          <div class="search-box">
+            <input type="search" id="drink-search-input" placeholder="ابحث عن مشروب (سبانش لاتيه، V60، ماتشا، موهيتو...)" aria-label="البحث في المشروبات" />
+          </div>
+          <div class="temp-filters">
+            <button class="filter-chip active" data-temp="all">الكل</button>
+            <button class="filter-chip" data-temp="hot">ساخن 🔥</button>
+            <button class="filter-chip" data-temp="cold">بارد ❄️</button>
+          </div>
+        </div>
+
+        <!-- 3D Drinks Grid -->
+        <div id="drinks-grid" class="drinks-grid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- Philosophy & Roastery Heritage -->
+    <section id="experience" class="heritage-section">
+      <div class="container heritage-grid">
+        <div class="heritage-card glass-panel">
+          <span class="section-kicker">معايير النخبة</span>
+          <h2>هندسة الاستخلاص على ساحل البحر</h2>
+          <p>
+            في <strong>كافيه بحر</strong>، نعامل كل كوب كتحفة معمارية. ننتقي حبوب البن من ارتفاعات تتجاوز 2000 متر في إثيوبيا وكولومبيا وبنما، ونحمصها يومياً في محمصتنا المطلة على المرسى لضمان نقاء النكهة.
+          </p>
+          <ul class="heritage-features">
+            <li><strong>مياه مفلترة بمعادن متوازنة:</strong> مخصصة خصيصاً لإبراز حلاوة الإسبريسو والقهوة المقطرة.</li>
+            <li><strong>جلسات بحرية معزولة صوتياً:</strong> تصميم داخلي يمزج خشب الساج البحري والرخام الأسود.</li>
+            <li><strong>تخصيص رقمي فوري:</strong> تحكم بدرجة التحميص، نوع الحليب، ومستوى الحلاوة قبل الطلب.</li>
+          </ul>
+        </div>
+        <div class="heritage-stats-grid">
+          <div class="stat-box glass-panel">
+            <span class="stat-num">1998</span>
+            <span class="stat-lbl">تأسيس أول فرع على الواجهة البحرية</span>
+          </div>
+          <div class="stat-box glass-panel">
+            <span class="stat-num">18°C</span>
+            <span class="stat-lbl">درجة حرارة تخزين المحاصيل النادرة</span>
+          </div>
+          <div class="stat-box glass-panel">
+            <span class="stat-num">9 Bar</span>
+            <span class="stat-lbl">ضغط استخلاص دقيق لمكائن La Marzocco</span>
+          </div>
+          <div class="stat-box glass-panel">
+            <span class="stat-num">100%</span>
+            <span class="stat-lbl">مكونات عضوية وفواكه طازجة يومياً</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIP Table Reservation -->
+    <section id="reservation" class="reservation-section">
+      <div class="container">
+        <div class="reservation-box glass-panel">
+          <div class="res-info">
+            <span class="section-kicker">خدمة الكونسيرج</span>
+            <h2>احجز طاولتك المطلة على البحر</h2>
+            <p>استمتع بتجربة كافيه بحر في التراس البحري المفتوح أو الصالة الملكية الداخلية.</p>
+          </div>
+          <form id="reservation-form" class="res-form">
+            <div class="form-group">
+              <label for="res-name">الاسم الكامل</label>
+              <input type="text" id="res-name" required placeholder="أدخل اسمك الكريم" />
+            </div>
+            <div class="form-group">
+              <label for="res-zone">موقع الجلسة</label>
+              <select id="res-zone">
+                <option value="terrace">التراس البحري المباشر (إطلالة الغروب)</option>
+                <option value="lounge">الصالة الملكية الداخلية (VIP)</option>
+                <option value="bar">بار القهوة المختصة (تذوق حي مع الباريستا)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="res-guests">عدد الضيوف</label>
+              <select id="res-guests">
+                <option value="2">شخصان (2)</option>
+                <option value="4">4 أشخاص</option>
+                <option value="6">6 أشخاص (مجلس خاص)</option>
+              </select>
+            </div>
+            <button type="submit" class="primary-gold-cta full-width">تأكيد الحجز الفوري</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 3D Inspector & Customization Modal -->
+  <div id="drink-modal" class="modal-backdrop" hidden role="dialog" aria-modal="true" aria-labelledby="modal-drink-title">
+    <div class="modal-container glass-panel">
+      <button id="modal-close-btn" class="modal-close" aria-label="إغلاق نافذة المعاينة">✕</button>
+      <div class="modal-grid">
+        <div class="modal-3d-viewport">
+          <div id="modal-canvas-host" class="modal-webgl-canvas"></div>
+          <div class="viewport-controls">
+            <button id="rotate-toggle-btn" class="chip-btn active">دوران تلقائي 360°</button>
+            <button id="wireframe-toggle-btn" class="chip-btn">عرض هندسي</button>
+            <span class="drag-hint">اسحب بالماوس أو الإصبع لتدوير الكوب بحرية</span>
+          </div>
+        </div>
+        <div class="modal-details">
+          <span id="modal-category-badge" class="luxury-tag">فئة المشروب</span>
+          <h2 id="modal-drink-title">اسم المشروب</h2>
+          <p id="modal-drink-desc" class="modal-desc"></p>
+          <div class="nutrition-strip">
+            <span id="modal-calories">180 سعرة</span>
+            <span>•</span>
+            <span id="modal-caffeine">كافيين متوسط</span>
+            <span>•</span>
+            <span id="modal-volume">320 مل</span>
+          </div>
+
+          <div class="customizer-section">
+            <div class="cust-group">
+              <label>حجم الكوب:</label>
+              <div class="option-pills" id="size-options">
+                <button type="button" class="opt-pill" data-size="S" data-delta="0">صغير (S)</button>
+                <button type="button" class="opt-pill active" data-size="M" data-delta="3">وسط (M +3 ر.س)</button>
+                <button type="button" class="opt-pill" data-size="L" data-delta="6">كبير (L +6 ر.س)</button>
+              </div>
+            </div>
+            <div class="cust-group">
+              <label>نوع الحليب / الأساس:</label>
+              <div class="option-pills" id="milk-options">
+                <button type="button" class="opt-pill active" data-milk="كامل الدسم">كامل الدسم</button>
+                <button type="button" class="opt-pill" data-milk="حليب الشوفان">حليب الشوفان</button>
+                <button type="button" class="opt-pill" data-milk="حليب اللوز">حليب اللوز</button>
+                <button type="button" class="opt-pill" data-milk="بدون حليب">بدون حليب</button>
+              </div>
+            </div>
+            <div class="cust-group">
+              <label>درجة الحلاوة:</label>
+              <div class="option-pills" id="sugar-options">
+                <button type="button" class="opt-pill" data-sugar="بدون سكر">بدون سكر</button>
+                <button type="button" class="opt-pill active" data-sugar="معتدل">معتدل</button>
+                <button type="button" class="opt-pill" data-sugar="إضافي">إضافي</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer-bar">
+            <div class="price-display">
+              <span class="price-lbl">الإجمالي</span>
+              <strong id="modal-price">24 ر.س</strong>
+            </div>
+            <button id="modal-add-to-cart" class="primary-gold-cta">إضافة الطلب إلى السلة</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide-Over Order Drawer -->
+  <aside id="cart-drawer" class="cart-drawer glass-panel" hidden aria-label="سلة الطلبات">
+    <div class="drawer-header">
+      <h3>طلباتك المختارة</h3>
+      <button id="cart-close-btn" class="modal-close" aria-label="إغلاق السلة">✕</button>
+    </div>
+    <div id="cart-items-container" class="drawer-body"></div>
+    <div class="drawer-footer">
+      <div class="total-row">
+        <span>المجموع الكلي (شامل الضريبة):</span>
+        <strong id="cart-total-amount">0 ر.س</strong>
+      </div>
+      <div class="table-input-row">
+        <input type="text" id="table-number-input" placeholder="رقم الطاولة (مثال: B-12) أو استلام" />
+      </div>
+      <button id="checkout-btn" class="primary-gold-cta full-width">إرسال الطلب للباريستا</button>
+    </div>
+  </aside>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>كافيه بحر — BAHR LUXURY CAFÉ</strong>
+        <p>الواجهة البحرية الفاخرة • جميع الحقوق محفوظة © 2026</p>
+      </div>
+      <div class="security-badge">
+        <span>🔒 نظام طلبات مشفر بتقنية AES-256-GCM</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
